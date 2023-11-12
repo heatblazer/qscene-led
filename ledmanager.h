@@ -11,11 +11,15 @@ Q_OBJECT
     QList<ledlight*> lights1;
     QList<ledlight*> lights2;
     QList<ledlight*> lights3;
+    QList<ledlight*> lights4;
+
     QList<QColor> colorMap;
 
     QTimer m_led1;
     QTimer m_led2;
     QTimer m_led3;
+    QTimer m_led4;
+
 
 
     QColor& getNextColor(int idx);
@@ -29,6 +33,8 @@ public:
     QList<ledlight*>& getLights1() ;
     QList<ledlight*>& getLights2() ;
     QList<ledlight*>& getLights3() ;
+    QList<ledlight*>& getLights4() ;
+
 
 signals:
 
@@ -41,6 +47,7 @@ private slots :
     void hTimeout1();
     void hTimeout2();
     void hTimeout3();
+    void hTimeout4();
 
 };
 
