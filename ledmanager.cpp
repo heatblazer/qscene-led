@@ -3,7 +3,8 @@
 #include <QRandomGenerator>
 #include <QTcpSocket>
 
-int ledmanager::colorIdx = 0;
+int colorIdx = 0;
+static QList<QColor> colorMap;
 
 QColor &ledmanager::getNextColor(int idx)
 {
@@ -85,7 +86,7 @@ void ledmanager::hConnection()
 
     socket->close();
 }
-
+#if 0
 void ledmanager::hTimeout()
 {
     static int rowidx=0,colidx=0, colormap=0;
@@ -95,3 +96,4 @@ void ledmanager::hTimeout()
  //       it[i]->setColor(getNextColor(colormap++));
  //   }
 }
+#endif

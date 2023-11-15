@@ -10,7 +10,6 @@ class ledmanager : public QObject
 Q_OBJECT
     QList<QList<ledlight*>> lights;
     QList<userdatatimer*>   timers;
-    QList<QColor> colorMap;
     QTcpServer *pServer;
 
     static int colorIdx;
