@@ -11,11 +11,13 @@ CONFIG += c++17
 SOURCES += \
     ledlight.cpp \
     ledmanager.cpp \
-    main.cpp
+    main.cpp \
+    userdatatimer.cpp
 
 HEADERS += \
     ledlight.h \
-    ledmanager.h
+    ledmanager.h \
+    userdatatimer.h
 
 FORMS +=
 
