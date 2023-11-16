@@ -24,7 +24,6 @@ public:
     QList<ledlight*>& getLedAt(unsigned int);
 
 
-    static QColor& getNextColor(int idx);
 
 signals:
 

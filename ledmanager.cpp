@@ -1,15 +1,7 @@
 #include "ledmanager.h"
 #include <iostream>
-#include <QRandomGenerator>
 #include <QTcpSocket>
 
-int colorIdx = 0;
-static QList<QColor> colorMap;
-
-QColor &ledmanager::getNextColor(int idx)
-{
-    return colorMap[idx++ % colorMap.count()];
-}
 
 ledmanager::ledmanager(int ledcnt, int leds, int w, int h)
 {
@@ -17,10 +9,6 @@ ledmanager::ledmanager(int ledcnt, int leds, int w, int h)
     info.leds = leds;
     info.width = w;
     info.height = h;
-
-    for(int i=0; i < 255; i++) {
-        colorMap.append(QColor{qrand() % 0xff, qrand() % 0xff, qrand() % 0xff, 128});
-    }
 
     lights.reserve(leds);
     for(int i=0 ; i < leds; i++) {
@@ -39,15 +27,16 @@ ledmanager::ledmanager(int ledcnt, int leds, int w, int h)
         }
     }
 
-    for(int i=0; i < ledcnt; i++)
+    for(int i=0; i < leds; i++)
     {
-        timers.push_back(new userdatatimer{this});
+        timers.push_back(new userdatatimer{lights.at(i), this});
     }
-//
-    for(int i=0; i < ledcnt; i++) {
-//        QObject::connect(timers[i], SIGNAL(timeout()), this, SLOT(hTimeout()));
+
+    for(int i=0; i < leds; i++) {
+        QObject::connect(timers[i], SIGNAL(timeout()), timers[i], SLOT(hTimeout()));
         timers[i]->setInterval((i+1) * 100);
     }
+
     pServer = new QTcpServer{this};
 }
 
@@ -86,14 +75,3 @@ void ledmanager::hConnection()
 
     socket->close();
 }
-#if 0
-void ledmanager::hTimeout()
-{
-    static int rowidx=0,colidx=0, colormap=0;
-    //auto it =
-    lights[rowidx++ % info.leds][0]->setColor(getNextColor(colormap++)); //
-//    for(int i=0; i < it.count(); i++) {
- //       it[i]->setColor(getNextColor(colormap++));
- //   }
-}
-#endif

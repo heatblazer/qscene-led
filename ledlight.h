@@ -3,6 +3,10 @@
 #include <QGraphicsRectItem>
 #include <QGraphicsItem>
 
+
+QColor& getNextColor(int idx);
+
+
 class ledlight : public QGraphicsItem
 {
     QColor color;

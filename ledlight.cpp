@@ -1,6 +1,16 @@
 #include "ledlight.h"
 #include <QPainter>
 
+static QList<QColor> colorMap = {QColor{0xff, 0x00, 0xff, 0xff} ,
+                                QColor{0x00, 0xff, 0x00, 0xff},
+                                 QColor{0x00, 0x00, 0xff, 0xff}};
+
+
+QColor &getNextColor(int idx)
+{
+    return colorMap[idx++ % colorMap.count()];
+}
+
 ledlight::ledlight() : color{0,0,0,0}
 {
 }
